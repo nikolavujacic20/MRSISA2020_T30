@@ -16,6 +16,9 @@ namespace Api.mis
         }
 
         public virtual DbSet<Pacijent> Pacijent { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -78,6 +81,83 @@ namespace Api.mis
                     .HasColumnName("surname")
                     .HasMaxLength(45)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.ToTable("role");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Uloga)
+                    .IsRequired()
+                    .HasColumnName("uloga")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user");
+
+                entity.HasIndex(e => e.Username)
+                    .HasName("username_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Aktivan).HasColumnName("aktivan");
+
+                entity.Property(e => e.Ime)
+                    .HasColumnName("ime")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Prezime)
+                    .HasColumnName("prezime")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasColumnName("username")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserRole>(entity =>
+            {
+                entity.ToTable("user_role");
+
+                entity.HasIndex(e => e.RoleId)
+                    .HasName("FK_role_idx");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("FK_user_idx");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.UserRole)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_role");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserRole)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_user");
             });
 
             OnModelCreatingPartial(modelBuilder);
