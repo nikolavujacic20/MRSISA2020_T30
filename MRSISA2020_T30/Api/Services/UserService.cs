@@ -30,20 +30,24 @@ namespace Api.Services
         public UserDto Authenticate(string username, string password)
         {
             var user = _context.User.FirstOrDefault(x => x.Username == username && x.Password == password);
-
+            var roles = _context.UserRole.Where(x => x.UserId == user.Id).Select(x => new RoleDto 
+            {
+                Id = x.RoleId,
+                Uloga = x.Role.Uloga
+            });
             // return null if user not found
             if (user == null)
                 return null;
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("sdjksjfkljasdoiqjojoiajdou3894729839  92347 1 1-3182 3ijo1j 1ojlmcls");
+            var key = Encoding.ASCII.GetBytes("12b6fb24-adb8-4ce5-aa49-79b265ebf256");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    //new Claim(ClaimTypes.Role,)
+                    new Claim(ClaimTypes.Role, string.Join(",", roles.Select(x => x.Uloga)))
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -53,7 +57,11 @@ namespace Api.Services
             UserDto userDto = new UserDto
             {
                 Id = user.Id,
-                Username = user.Username
+                Username = user.Username,
+                Ime = user.Ime,
+                Prezime = user.Prezime,
+                Aktivan = user.Aktivan,
+                Role = roles.Select(x => x.Uloga).ToList()
             };
             userDto.Token = tokenHandler.WriteToken(token);
 

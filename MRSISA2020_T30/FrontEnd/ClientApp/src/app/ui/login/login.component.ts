@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { UserDto } from '../../Dto/UserDto';
 
 @Component({
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.username = "alsdlas";
   }
 
   submit() {

@@ -17,7 +17,7 @@ using System.Text;
 
 namespace Api
 {
-    public class Startup
+    public class Startup    
     {
         public Startup(IConfiguration configuration)
         {
@@ -50,7 +50,7 @@ namespace Api
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("sdjksjfkljasdoiqjojoiajdou3894729839  92347 1 1 - 3182 3ijo1j 1ojlmcls")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Jwt:key"])),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -75,6 +75,8 @@ namespace Api
             app.UseCors("CorsPolicy");
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Dto\UserDto.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\Variables.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\variables.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

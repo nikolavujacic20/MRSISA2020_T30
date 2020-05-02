@@ -14,6 +14,7 @@ namespace Api.Dto
         public string Prezime { get; set; }
         public int Aktivan { get; set; }
         public string Token { get; set; }
+        public List<string> Role { get; set; }
     }
 
     

@@ -8,11 +8,12 @@ using MySql.Data.MySqlClient;
 using Api.mis;
 using Api.Dto;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Api.Controllers
 {
     [ApiController]
-    //[Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         protected IUserService _userService;
@@ -21,8 +22,8 @@ namespace Api.Controllers
             _userService = userService;
         }
 
-        [Authorize]
-        [HttpGet("api/user/{id}")]
+        [Authorize(Roles="Pacijent")]
+        [HttpGet("{id}")]
         public User GetById(int id)
         {
             return _userService.getUserById(id);
@@ -35,7 +36,7 @@ namespace Api.Controllers
         //}
 
         [AllowAnonymous]
-        [HttpPost("api/user/authenticate")]
+        [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userParam)
         {
             var user = _userService.Authenticate(userParam.Username, userParam.Password);

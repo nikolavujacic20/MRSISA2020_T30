@@ -10,4 +10,4 @@ var Variables = /** @class */ (function () {
     return Variables;
 }());
 exports.Variables = Variables;
-//# sourceMappingURL=Variables.js.map
+//# sourceMappingURL=variables.js.map
