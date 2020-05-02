@@ -24,7 +24,10 @@ namespace Api.Services
 
         public User getUserById(int id)
         {
-            return _context.User.FirstOrDefault(x => x.Id == id);
+           /* return*/ var zmaj= _context.User.FirstOrDefault(x => x.Id == id);
+            //zmaj.Ime = "zmaj";
+            //_context.SaveChanges();
+            return zmaj;
         }
 
         public UserDto Authenticate(string username, string password)
