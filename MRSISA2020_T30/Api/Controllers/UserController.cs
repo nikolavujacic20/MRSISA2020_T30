@@ -22,10 +22,11 @@ namespace Api.Controllers
             _userService = userService;
         }
 
-        [Authorize(Roles="Pacijent")]
+        [Authorize]
         [HttpGet("{id}")]
         public User GetById(int id)
         {
+            var let = HttpContext.User;
             return _userService.getUserById(id);
         }
 

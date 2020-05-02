@@ -25,11 +25,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\Dto\UserDto.ts" />
+    <None Remove="ClientApp\src\app\interceptors\token-interceptor.ts" />
     <None Remove="ClientApp\src\app\Variables.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Dto\UserDto.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interceptors\token-interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\variables.ts" />
   </ItemGroup>
 
