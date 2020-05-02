@@ -24,7 +24,10 @@ namespace Api.Services
 
         public User getUserById(int id)
         {
-            return _context.User.FirstOrDefault(x => x.Id == id);
+           /* return*/ var zmaj= _context.User.FirstOrDefault(x => x.Id == id);
+            //zmaj.Ime = "zmaj";
+            //_context.SaveChanges();
+            return zmaj;
         }
 
         public UserDto Authenticate(string username, string password)
@@ -49,7 +52,7 @@ namespace Api.Services
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, string.Join(",", roles.Select(x => x.Uloga)))
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
