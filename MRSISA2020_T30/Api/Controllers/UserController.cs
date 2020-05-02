@@ -30,13 +30,9 @@ namespace Api.Controllers
             return _userService.getUserById(id);
         }
 
-        //[HttpPost("api/user")]
-        //public User GetByPostId([FromForm] Zmaj hey)
-        //{
-        //    return _userService.getUserById(hey.Id);
-        //}
+       
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userParam)
         {
@@ -48,11 +44,22 @@ namespace Api.Controllers
             return Ok(user);
         }
 
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]UserDto userParam)
+        {
+
+            var user = _userService.Register(userParam);
+
+            if (user == null)
+                return BadRequest(new { message = "Registration is invalid" });
+
+            return Ok(user);
+
+
+
+        }
 
     }
 
-    public class Zmaj
-    {
-        public int Id { get; set; }
-    }
+
 }

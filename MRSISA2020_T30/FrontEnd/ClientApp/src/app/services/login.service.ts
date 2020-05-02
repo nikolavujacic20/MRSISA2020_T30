@@ -3,26 +3,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDto } from '../Dto/UserDto';
 import { Variables } from '../Variables';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService extends BaseService {
 
   constructor(private http: HttpClient,
-     @Inject('BASE_URL') private baseUrl: string) {
+    @Inject('BASE_URL') private baseUrl: string) {
+    super();
   }
 
   login(Username: string, Password: string): Observable<UserDto> {
-    let httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache'
-    });
-    let options = {
-      headers: httpHeaders
-    }; 
+ 
     var params = JSON.stringify({ Username, Password });
-    return this.http.post<UserDto>(Variables.getApiEndpoint() + "api/user/authenticate", params, options);
+    return this.http.post<UserDto>(Variables.getApiEndpoint() + "api/user/authenticate", params, this.options);
   }
 
   saveUser(user: UserDto) {

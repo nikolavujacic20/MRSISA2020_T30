@@ -30,6 +30,64 @@ namespace Api.Services
             return zmaj;
         }
 
+
+        public UserDto Register(UserDto user)
+        {
+
+            if (user.Ime.Length <= 3)
+                return null;
+
+            if (user.Prezime.Length <= 3)
+                return null;
+
+            if (user.Username.Length <= 3)
+                return null;
+
+            if (user.Password.Length <= 3)
+                return null;
+
+            var userBase = _context.User.Where(x => x.Username == user.Username).FirstOrDefault();
+
+
+            if (userBase != null)
+                return null;
+
+
+
+            var newUser = new User
+            {
+                Aktivan = 1,
+                Prezime = user.Prezime,
+                Ime = user.Ime,
+                Username = user.Username,
+                Password = user.Password,
+            };
+            _context.User.Add(newUser);
+         
+            _context.SaveChanges();
+
+            newUser.UserRole = new List<UserRole>();
+                newUser.UserRole.Add(new UserRole{ UserId = newUser.Id, RoleId = 3 });
+            _context.SaveChanges();
+
+            var newUserDto = new UserDto
+            {
+                Aktivan = 1,
+                Prezime = newUser.Prezime,
+                Ime = newUser.Ime,
+                Username = newUser.Username,
+                Password = newUser.Password,
+                Id = newUser.Id,
+            };
+
+
+            return newUserDto;
+
+        }
+
+
+
+                
         public UserDto Authenticate(string username, string password)
         {
             var user = _context.User.FirstOrDefault(x => x.Username == username && x.Password == password);

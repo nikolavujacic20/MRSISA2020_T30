@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { UiModule } from './ui/ui.module';
 import { LoginComponent } from './ui/login/login.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
+import { RegisterComponent } from './ui/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TokenInterceptor } from './interceptors/token-interceptor';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent}
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
     ]),
     UiModule
   ],

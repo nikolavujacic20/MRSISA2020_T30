@@ -12,5 +12,7 @@ namespace Api.Services
         User getUserById(int id);
 
         UserDto Authenticate(string username, string password);
+
+        UserDto Register(UserDto user);
     }
 }
