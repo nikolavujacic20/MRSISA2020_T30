@@ -59,6 +59,17 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet("activate")]
+        public IActionResult Activate([FromQuery] string code)
+        {
+            var completed = _userService.Activate(code);
+
+            if (completed)
+                return BadRequest(new { message = "Aktivacija nije uspesna, kontaktirajte administratora." });
+
+            return Ok("Aktivacija uspesna");
+        }
+
     }
 
 

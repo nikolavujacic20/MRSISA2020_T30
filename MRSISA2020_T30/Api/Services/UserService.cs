@@ -35,7 +35,6 @@ namespace Api.Services
 
         public UserDto Register(UserDto user)
         {
-
             if (user.Ime.Length <= 3)
                 return null;
 
@@ -145,6 +144,20 @@ namespace Api.Services
             user.Password = null;
 
             return userDto;
+        }
+
+        public bool Activate(string code)
+        {
+            var user = _context.User.FirstOrDefault(x => x.AktivacioniToken == code);
+
+            if(user != null)
+            {
+                user.Aktivan = 1;
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

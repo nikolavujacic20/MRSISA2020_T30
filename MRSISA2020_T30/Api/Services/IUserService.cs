@@ -14,5 +14,7 @@ namespace Api.Services
         UserDto Authenticate(string username, string password);
 
         UserDto Register(UserDto user);
+
+        bool Activate(string code);
     }
 }
