@@ -30,7 +30,9 @@ namespace Api.Services
                 {
                     MailAddress to = new MailAddress(email);
                     client.EnableSsl = true;
-                    
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new System.Net.NetworkCredential("nikolavujacic20@gmail.com", "lifeisgood1996");
+
 
                     client.Send(new MailMessage(to,to) {Subject=subject,Body=message });
                 
