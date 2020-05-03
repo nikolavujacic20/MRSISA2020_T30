@@ -17,8 +17,10 @@ namespace Api.Services
     public class UserService : IUserService
     {
         private readonly misContext _context;
-        public UserService(misContext context)
+        public IEmailSender _emailSender;
+        public UserService(misContext context,IEmailSender emailSender)
         {
+            _emailSender = emailSender;
             _context = context;
         }
 
@@ -51,7 +53,7 @@ namespace Api.Services
 
             if (userBase != null)
                 return null;
-
+            Guid g = Guid.NewGuid();
 
 
             var newUser = new User
@@ -61,7 +63,16 @@ namespace Api.Services
                 Ime = user.Ime,
                 Username = user.Username,
                 Password = user.Password,
-            };
+                Email = "nikolavujacic20@gmail.com",
+                Adresa=user.Adresa,
+                Grad=user.Grad,
+                Drzava = user.Drzava,
+                Lbo = "123",
+                Telefon = user.Telefon,
+                AktivacioniToken = Convert.ToBase64String(g.ToByteArray())
+               
+        };
+            
             _context.User.Add(newUser);
          
             _context.SaveChanges();
@@ -69,6 +80,10 @@ namespace Api.Services
             newUser.UserRole = new List<UserRole>();
                 newUser.UserRole.Add(new UserRole{ UserId = newUser.Id, RoleId = 3 });
             _context.SaveChanges();
+
+            _emailSender.SendEmailAsync("nikolavujacic20@gmail.com", "123", "Radi");
+
+
 
             var newUserDto = new UserDto
             {
@@ -90,7 +105,7 @@ namespace Api.Services
                 
         public UserDto Authenticate(string username, string password)
         {
-            var user = _context.User.FirstOrDefault(x => x.Username == username && x.Password == password);
+            var user = _context.User.FirstOrDefault(x => x.Username == username && x.Password == password&&x.Aktivan==1);
             var roles = _context.UserRole.Where(x => x.UserId == user.Id).Select(x => new RoleDto 
             {
                 Id = x.RoleId,

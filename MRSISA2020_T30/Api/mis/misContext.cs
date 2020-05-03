@@ -100,16 +100,49 @@ namespace Api.mis
             {
                 entity.ToTable("user");
 
-                entity.HasIndex(e => e.Username)
+                entity.HasIndex(e => new { e.Username, e.Email })
                     .HasName("username_UNIQUE")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Adresa)
+                    .HasColumnName("adresa")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AktivacioniToken)
+                    .IsRequired()
+                    .HasColumnName("aktivacioni_token")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Aktivan).HasColumnName("aktivan");
+
+                entity.Property(e => e.Drzava)
+                    .HasColumnName("drzava")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Grad)
+                    .HasColumnName("grad")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Ime)
                     .HasColumnName("ime")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Lbo)
+                    .IsRequired()
+                    .HasColumnName("lbo")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
@@ -121,6 +154,11 @@ namespace Api.mis
 
                 entity.Property(e => e.Prezime)
                     .HasColumnName("prezime")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefon)
+                    .HasColumnName("telefon")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 

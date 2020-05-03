@@ -14,6 +14,7 @@ using Api.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using Api.Dto;
 
 namespace Api
 {
@@ -29,7 +30,11 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Add(new ServiceDescriptor(typeof(misContext), new misContext()));
+
+            
+            services.Configure<SmtpSettings>(Configuration.GetSection("Smtp"));
+            services.AddTransient<IEmailSender, EmailSender>();
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
