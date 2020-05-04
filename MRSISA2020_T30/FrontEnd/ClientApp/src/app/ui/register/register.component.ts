@@ -23,11 +23,9 @@ export class RegisterComponent implements OnInit {
   constructor(private LoginService: LoginService, private UserService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    //private authenticationService: AuthenticationService,
-    //private userService: UserService,
-    //private alertService: AlertService
+   
   ) {
-    // redirect to home if already logged in
+    
     if (this.LoginService.getUser()) {
       this.router.navigate(['/']);
     }
@@ -41,13 +39,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
+  
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
+    
     if (this.registerForm.invalid) {
       return;
     }

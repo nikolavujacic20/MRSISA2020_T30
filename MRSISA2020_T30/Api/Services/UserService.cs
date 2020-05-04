@@ -9,8 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Api.Dto;
-//using WebApi.Entities;
-//using WebApi.Helpers;
+
 
 namespace Api.Services
 {
@@ -27,8 +26,7 @@ namespace Api.Services
         public User getUserById(int id)
         {
            /* return*/ var zmaj= _context.User.FirstOrDefault(x => x.Id == id);
-            //zmaj.Ime = "zmaj";
-            //_context.SaveChanges();
+  
             return zmaj;
         }
 
@@ -62,7 +60,7 @@ namespace Api.Services
                 Ime = user.Ime,
                 Username = user.Username,
                 Password = user.Password,
-                Email = "nikolavujacic20@gmail.com",
+                Email = user.Email,
                 Adresa=user.Adresa,
                 Grad=user.Grad,
                 Drzava = user.Drzava,
@@ -80,7 +78,7 @@ namespace Api.Services
                 newUser.UserRole.Add(new UserRole{ UserId = newUser.Id, RoleId = 3 });
             _context.SaveChanges();
 
-            _emailSender.SendEmailAsync("nikolavujacic20@gmail.com", "123", "Radi");
+            _emailSender.SendEmailAsync("nikolavujacic20@gmail.com", "Registration confirmation", "Radi");
 
 
 
@@ -110,11 +108,11 @@ namespace Api.Services
                 Id = x.RoleId,
                 Uloga = x.Role.Uloga
             });
-            // return null if user not found
+          
             if (user == null)
                 return null;
 
-            // authentication successful so generate jwt token
+           
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("12b6fb24-adb8-4ce5-aa49-79b265ebf256");
             var tokenDescriptor = new SecurityTokenDescriptor

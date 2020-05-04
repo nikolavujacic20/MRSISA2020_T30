@@ -27,7 +27,7 @@ namespace Api.Controllers
         public User GetById(int id)
         {
             if (Convert.ToInt32(HttpContext.User.Identity.Name) == id)
-                //var let = HttpContext.User;
+                
             return _userService.getUserById(id);
             return null;
         }

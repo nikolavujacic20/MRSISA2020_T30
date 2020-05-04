@@ -24,7 +24,7 @@ namespace Api.Services
         public void SendEmailAsync(string email, string subject, string message)
         {
             var from = _smtpSettings.FromAddress;
-            //other logic
+            
             using (var client = new SmtpClient("smtp.gmail.com", 587))
             {
                 {
