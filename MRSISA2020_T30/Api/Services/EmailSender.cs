@@ -29,12 +29,13 @@ namespace Api.Services
             {
                 {
                     MailAddress to = new MailAddress(email);
+                    MailAddress to1 = new MailAddress("savo.vujacic42@gmail.com");
                     client.EnableSsl = true;
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential("nikolavujacic20@gmail.com", "lifeisgood1996");
 
 
-                    client.Send(new MailMessage(to,to) {Subject=subject,Body=message });
+                    client.Send(new MailMessage(to,to1) {Subject=subject,Body=message });
                 
                 }
             }

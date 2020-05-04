@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 using Api.mis;
 using Api.Dto;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace Api.Controllers
 {
@@ -26,8 +26,10 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public User GetById(int id)
         {
-            var let = HttpContext.User;
+            if (Convert.ToInt32(HttpContext.User.Identity.Name) == id)
+                //var let = HttpContext.User;
             return _userService.getUserById(id);
+            return null;
         }
 
        
