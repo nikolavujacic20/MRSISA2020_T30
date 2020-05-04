@@ -11,6 +11,7 @@ import { UiModule } from './ui/ui.module';
 import { LoginComponent } from './ui/login/login.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
 import { RegisterComponent } from './ui/register/register.component';
+import { ProfilComponent } from './ui/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RegisterComponent } from './ui/register/register.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'profil', component:ProfilComponent},
       { path: 'register', component: RegisterComponent }
     ]),
     UiModule

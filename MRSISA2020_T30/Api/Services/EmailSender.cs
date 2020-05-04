@@ -23,19 +23,19 @@ namespace Api.Services
         }
         public void SendEmailAsync(string email, string subject, string message)
         {
-            var from = _smtpSettings.FromAddress;
+            //var from = _smtpSettings.FromAddress;
             
             using (var client = new SmtpClient("smtp.gmail.com", 587))
             {
                 {
-                    MailAddress to = new MailAddress(email);
-                    MailAddress to1 = new MailAddress("savo.vujacic42@gmail.com");
+                    MailAddress from = new MailAddress("nikolavujacic20@gmail.com");
+                    MailAddress to1 = new MailAddress(email);
                     client.EnableSsl = true;
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential("nikolavujacic20@gmail.com", "lifeisgood1996");
 
 
-                    client.Send(new MailMessage(to,to1) {Subject=subject,Body=message });
+                    client.Send(new MailMessage(from,to1) {Subject=subject,Body=message });
                 
                 }
             }

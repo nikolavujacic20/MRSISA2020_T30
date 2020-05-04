@@ -66,13 +66,28 @@ namespace Api.Controllers
         {
             var completed = _userService.Activate(code);
 
-            if (completed)
+            if (!completed)
                 return BadRequest(new { message = "Aktivacija nije uspesna, kontaktirajte administratora." });
 
             return Ok("Aktivacija uspesna");
         }
 
+
+        [HttpPost]
+        public IActionResult Save([FromBody] UserDto userUpdate)
+        {
+            var user = _userService.Save(userUpdate);
+
+            if (user == null)
+                return BadRequest(new { message = "Edit failed" });
+
+            return Ok(user);
+
+        }
+
     }
+
+   
 
 
 }

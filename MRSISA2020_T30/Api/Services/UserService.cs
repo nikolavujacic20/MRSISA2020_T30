@@ -17,6 +17,7 @@ namespace Api.Services
     {
         private readonly misContext _context;
         public IEmailSender _emailSender;
+
         public UserService(misContext context,IEmailSender emailSender)
         {
             _emailSender = emailSender;
@@ -55,18 +56,21 @@ namespace Api.Services
 
             var newUser = new User
             {
-                Aktivan = 1,
+                Aktivan = 0,
                 Prezime = user.Prezime,
                 Ime = user.Ime,
                 Username = user.Username,
                 Password = user.Password,
                 Email = user.Email,
-                Adresa=user.Adresa,
-                Grad=user.Grad,
+                Adresa = user.Adresa,
+                Grad = user.Grad,
                 Drzava = user.Drzava,
                 Lbo = "123",
                 Telefon = user.Telefon,
                 AktivacioniToken = Convert.ToBase64String(g.ToByteArray())
+                    .Substring(0, 22)
+                    .Replace("/", "_")
+                    .Replace("+", "-")
                
         };
             
@@ -78,7 +82,7 @@ namespace Api.Services
                 newUser.UserRole.Add(new UserRole{ UserId = newUser.Id, RoleId = 3 });
             _context.SaveChanges();
 
-            _emailSender.SendEmailAsync("nikolavujacic20@gmail.com", "Registration confirmation", "Radi");
+            _emailSender.SendEmailAsync(newUser.Email, "Registration confirmation", "http://localhost:51447/api/user/activate?code="+ newUser.AktivacioniToken);
 
 
 
@@ -156,6 +160,35 @@ namespace Api.Services
             }
 
             return false;
+        }
+
+        public UserDto Save(UserDto user)
+        {
+            var userDB = _context.User.FirstOrDefault(x => x.Id == user.Id);
+            userDB.Ime = user.Ime;
+            userDB.Prezime = user.Prezime;
+            userDB.Adresa = user.Adresa;
+            userDB.Grad = user.Grad;
+            userDB.Drzava = user.Drzava;
+            userDB.Telefon = user.Telefon;
+
+            _context.SaveChanges();
+
+            return new UserDto
+            {
+                Aktivan = userDB.Aktivan,
+                Prezime = userDB.Prezime,
+                Ime = userDB.Ime,
+                Username = userDB.Username,
+                Password = userDB.Password,
+                Adresa = userDB.Adresa,
+                Grad = userDB.Grad,
+                Drzava =userDB.Drzava,
+                Email = userDB.Email,
+                Lbo = userDB.Lbo,
+                Id = userDB.Id,
+            } ;
+
         }
     }
 }

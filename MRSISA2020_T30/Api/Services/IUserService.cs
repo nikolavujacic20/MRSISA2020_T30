@@ -16,5 +16,7 @@ namespace Api.Services
         UserDto Register(UserDto user);
 
         bool Activate(string code);
+
+        UserDto Save(UserDto user);
     }
 }

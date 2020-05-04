@@ -15,7 +15,6 @@ namespace Api.mis
         {
         }
 
-        public virtual DbSet<Pacijent> Pacijent { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
@@ -31,58 +30,6 @@ namespace Api.mis
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pacijent>(entity =>
-            {
-                entity.ToTable("pacijent");
-
-                entity.HasIndex(e => e.Jmbg)
-                    .HasName("jmbg_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Lbo)
-                    .HasName("lbo_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int unsigned");
-
-                entity.Property(e => e.Active).HasColumnName("active");
-
-                entity.Property(e => e.Birth)
-                    .HasColumnName("birth")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.BloodType)
-                    .HasColumnName("blood_type")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Jmbg)
-                    .IsRequired()
-                    .HasColumnName("jmbg")
-                    .HasMaxLength(13)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Lbo)
-                    .IsRequired()
-                    .HasColumnName("lbo")
-                    .HasMaxLength(11)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Surname)
-                    .IsRequired()
-                    .HasColumnName("surname")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.ToTable("role");
@@ -114,7 +61,7 @@ namespace Api.mis
                 entity.Property(e => e.AktivacioniToken)
                     .IsRequired()
                     .HasColumnName("aktivacioni_token")
-                    .HasMaxLength(45)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Aktivan).HasColumnName("aktivan");

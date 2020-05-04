@@ -15,13 +15,14 @@ import { UserDto } from '../../Dto/UserDto';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  passwordControl: string;
   loading = false;
   submitted = false;
 
   user: UserDto = new UserDto();
 
   constructor(private LoginService: LoginService, private UserService: UserService,
-    private formBuilder: FormBuilder,
+    
     private router: Router,
    
   ) {
@@ -31,24 +32,28 @@ export class RegisterComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+    //this.registerForm = this.formBuilder.group({
+    //  firstName: ['', Validators.required],
+    //  lastName: ['', Validators.required],
+    //  username: ['', Validators.required],
+    //  password: ['', [Validators.required, Validators.minLength(6)]]
+    //});
   }
 
   
-  get f() { return this.registerForm.controls; }
+  //get f() { return this.registerForm.controls; }
 
   onSubmit() {
+  
     this.submitted = true;
 
     
-    if (this.registerForm.invalid) {
+    //if (this.registerForm.invalid) {
+    //  return;
+    //}
+
+    if (this.user.password != this.passwordControl)
       return;
-    }
 
     this.loading = true;
     this.UserService.register(this.user)
