@@ -16,27 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `exam`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `exam`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
-  `id` int NOT NULL,
-  `uloga` varchar(45) NOT NULL,
+CREATE TABLE `exam` (
+  `date` varchar(45) NOT NULL,
+  `time` varchar(45) DEFAULT NULL,
+  `exam_type` varchar(45) DEFAULT NULL,
+  `doctor` varchar(45) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `discount_price` int DEFAULT NULL,
+  `taken` varchar(45) DEFAULT NULL,
+  `id` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `exam`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Admin'),(2,'Lekar'),(3,'Pacijent');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `exam` WRITE;
+/*!40000 ALTER TABLE `exam` DISABLE KEYS */;
+INSERT INTO `exam` VALUES ('19.04.2020.','19:30','Tip1','Nikola Vujacic',2000,1500,'0','1');
+/*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

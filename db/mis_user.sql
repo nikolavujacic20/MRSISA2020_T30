@@ -28,10 +28,17 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `ime` varchar(45) DEFAULT NULL,
   `prezime` varchar(45) DEFAULT NULL,
-  `aktivan` int NOT NULL,
+  `aktivan` int NOT NULL DEFAULT '0',
+  `email` varchar(45) NOT NULL,
+  `adresa` varchar(45) DEFAULT NULL,
+  `grad` varchar(45) DEFAULT NULL,
+  `drzava` varchar(45) DEFAULT NULL,
+  `telefon` varchar(45) DEFAULT NULL,
+  `lbo` varchar(45) NOT NULL,
+  `aktivacioni_token` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `username_UNIQUE` (`username`,`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +47,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','pass',NULL,NULL,1);
+INSERT INTO `user` VALUES (1,'admin','pass','Nikola','Probic',1,'nikolavujacic20@gmail.com','MB Blok','Valjevo','Srbija','0643996648','1255',''),(19,'Proba','pass','Nikola','Vujacic',1,'nikolavujacic20@gmail.com','MB Blok','Valjevo','Srbija',NULL,'123','ZbO25T68lUWF5Z4vzTMpmw');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-02 15:32:28
+-- Dump completed on 2020-05-17 20:59:53
