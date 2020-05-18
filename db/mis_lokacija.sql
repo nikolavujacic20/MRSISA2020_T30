@@ -16,43 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exam`
+-- Table structure for table `lokacija`
 --
 
-DROP TABLE IF EXISTS `exam`;
+DROP TABLE IF EXISTS `lokacija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `exam` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `datetime` datetime NOT NULL,
-  `exam_type` varchar(45) NOT NULL,
-  `anameza` text,
-  `zakljucak` text,
-  `location_id` int DEFAULT '0',
-  `pacijent_id` int DEFAULT '0',
-  `doctor_id` int DEFAULT '0',
-  `price` int DEFAULT NULL,
-  `discount_price` int DEFAULT NULL,
-  `taken` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uinque_lekar_vreme` (`doctor_id`,`datetime`),
-  KEY `fk_doktor_idx` (`doctor_id`),
-  KEY `fk_pacijent_idx` (`pacijent_id`),
-  KEY `fk_lokacija_idx` (`location_id`),
-  CONSTRAINT `fk_doktor` FOREIGN KEY (`doctor_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_lokacija` FOREIGN KEY (`location_id`) REFERENCES `lokacija` (`id`),
-  CONSTRAINT `fk_pacijent` FOREIGN KEY (`pacijent_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `lokacija` (
+  `id` int NOT NULL,
+  `naziv` varchar(45) DEFAULT NULL,
+  `aktivan` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exam`
+-- Dumping data for table `lokacija`
 --
 
-LOCK TABLES `exam` WRITE;
-/*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (1,'2013-01-01 13:00:00','ocni','',NULL,1,1,1,125,NULL,1),(2,'2014-01-01 13:00:00','tip2','',NULL,1,1,1,127,NULL,1),(3,'2015-01-01 13:00:00','tip3','',NULL,1,1,1,126,NULL,1),(7,'2021-01-01 12:00:00','tip1',NULL,NULL,1,1,1,NULL,NULL,0);
-/*!40000 ALTER TABLE `exam` ENABLE KEYS */;
+LOCK TABLES `lokacija` WRITE;
+/*!40000 ALTER TABLE `lokacija` DISABLE KEYS */;
+INSERT INTO `lokacija` VALUES (1,'Klinika Novi Beograd',1);
+/*!40000 ALTER TABLE `lokacija` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -64,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-18 23:51:24
+-- Dump completed on 2020-05-18 23:51:23
