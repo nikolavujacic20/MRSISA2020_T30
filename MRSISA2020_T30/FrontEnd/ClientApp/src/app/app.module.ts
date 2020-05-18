@@ -12,6 +12,7 @@ import { LoginComponent } from './ui/login/login.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
 import { RegisterComponent } from './ui/register/register.component';
 import { ProfilComponent } from './ui/profil/profil.component';
+import { ExamComponent } from './ui/exam/exam.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProfilComponent } from './ui/profil/profil.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'profil', component:ProfilComponent},
-      { path: 'register', component: RegisterComponent }
+      { path: 'register', component: RegisterComponent },
+      { path: 'exam', component: ExamComponent }
     ]),
     UiModule
   ],

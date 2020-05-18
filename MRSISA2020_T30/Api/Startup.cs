@@ -63,6 +63,7 @@ namespace Api
 
             services.AddDbContext<misContext>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExamService, ExamService>();
 
             services.AddControllers();
 

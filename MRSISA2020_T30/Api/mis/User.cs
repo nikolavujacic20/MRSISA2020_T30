@@ -7,6 +7,8 @@ namespace Api.mis
     {
         public User()
         {
+            ExamDoctor = new HashSet<Exam>();
+            ExamPacijent = new HashSet<Exam>();
             UserRole = new HashSet<UserRole>();
         }
 
@@ -24,6 +26,8 @@ namespace Api.mis
         public string Lbo { get; set; }
         public string AktivacioniToken { get; set; }
 
+        public virtual ICollection<Exam> ExamDoctor { get; set; }
+        public virtual ICollection<Exam> ExamPacijent { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }

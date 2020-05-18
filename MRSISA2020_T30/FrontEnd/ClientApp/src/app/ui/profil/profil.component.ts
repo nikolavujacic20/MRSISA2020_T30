@@ -12,7 +12,6 @@ import { LoginService } from '../../services/login.service';
 })
 export class ProfilComponent implements OnInit {
   public user: UserDto = new UserDto();
-  
 
   constructor(
     private profilService:ProfilService,
@@ -33,6 +32,7 @@ export class ProfilComponent implements OnInit {
       .subscribe({
       next: (user: UserDto) => {
           this.user = user;
+          
       },
         error: (ex: Error) => {
           console.log(ex.message);
